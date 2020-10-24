@@ -7,10 +7,16 @@ import { CreditCardFormComponent } from './credit-card-form/credit-card-form.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './input/input.component';
 import { CardComponent } from './card/card.component';
+import { GameModule } from './game/game.module';
 
 @NgModule({
-  declarations: [AppComponent, CreditCardFormComponent, InputComponent, CardComponent],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  declarations: [
+    AppComponent,
+    CreditCardFormComponent,
+    InputComponent,
+    CardComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, GameModule],
   providers: [],
   bootstrap: [AppComponent],
 })
