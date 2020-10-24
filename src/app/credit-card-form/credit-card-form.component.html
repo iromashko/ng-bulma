@@ -1,1 +1,24 @@
-<p>credit-card-form works!</p>
+<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+  <app-input [control]="cardForm.get('name')" label="Name"></app-input>
+  <app-input
+    [control]="cardForm.get('cardNumber')"
+    label="Card Number"
+  ></app-input>
+  <app-input
+    [control]="cardForm.get('expiration')"
+    label="Expiration"
+  ></app-input>
+  <app-input
+    [control]="cardForm.get('securityCode')"
+    label="Security Code"
+  ></app-input>
+
+  <button [disabled]="cardForm.invalid" class="button is-primary" type="submit">
+    Submit
+  </button>
+</form>
+
+<br />
+<div>Form Contents: {{ cardForm.value | json }}</div>
+<div>Form i valid: {{ cardForm.valid }}</div>
+<div>Errors around name {{ cardForm.controls.name.errors | json }}</div>
