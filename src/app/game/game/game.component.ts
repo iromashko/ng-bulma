@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Item } from '../models/item';
 
 @Component({
@@ -15,23 +15,23 @@ export class GameComponent implements OnInit {
     },
     {
       value: 4,
-      col: 1,
-      row: 1,
+      col: 2,
+      row: 3,
     },
     {
       value: 8,
-      col: 1,
-      row: 1,
+      col: 4,
+      row: 3,
     },
     {
       value: 16,
       col: 1,
-      row: 1,
+      row: 2,
     },
     {
       value: 32,
       col: 1,
-      row: 1,
+      row: 3,
     },
     {
       value: 64,
@@ -65,14 +65,45 @@ export class GameComponent implements OnInit {
     },
   ];
 
+  keyEventCodeMap: { [type: string]: string } = {
+    ArrowRight: 'ArrowRight',
+    ArrowLeft: 'ArrowLeft',
+    ArrowUp: 'ArrowUp',
+    ArrowDown: 'ArrowDown',
+  };
+
+  colorMap: { [k: number]: string } = {
+    2: '#626567',
+    4: '#424949',
+    8: '#7E5109',
+    16: '#196f3d',
+    32: '#138d75',
+    64: '#154360',
+    128: '#9b59b6',
+    256: '#78281f',
+    512: '#c0392b',
+    1024: '#7d6608',
+    2048: '#45b39d',
+  };
+
   constructor() {}
 
   ngOnInit(): void {}
 
-  public getStyles(item: Item): { [p: string]: string } {
+  getStyles(item: Item): { [p: string]: string } {
     const top = item.row * 110 - 100 + 'px';
-    const left = item.row * 110 - 100 + 'px';
+    const left = item.col * 110 - 100 + 'px';
 
-    return { top, left, 'background-color': 'brown' };
+    return {
+      top,
+      left,
+      'background-color': this.colorMap[item.value] || 'black',
+    };
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent) {
+    Object.keys(this.keyEventCodeMap).includes(event.code);
+    console.log(this.keyEventCodeMap[event.code]);
   }
 }
