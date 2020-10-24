@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateFormControl } from '../date-form-control';
 
 @Component({
   selector: 'app-credit-card-form',
@@ -8,14 +9,21 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CreditCardFormComponent implements OnInit {
   cardForm = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl('', [Validators.required]),
+    cardNumber: new FormControl('', [
       Validators.required,
       Validators.minLength(16),
       Validators.maxLength(16),
     ]),
-    cardNumber: new FormControl('', [Validators.required]),
-    expiration: new FormControl('', [Validators.required]),
-    securityCode: new FormControl('', [Validators.required]),
+    expiration: new DateFormControl('', [
+      Validators.required,
+      Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/),
+    ]),
+    securityCode: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(3),
+    ]),
   });
 
   constructor() {
@@ -26,5 +34,9 @@ export class CreditCardFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log(`form was submitted`);
+  }
+
+  onResetClick(): void {
+    this.cardForm.reset();
   }
 }

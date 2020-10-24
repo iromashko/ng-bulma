@@ -1,24 +1,50 @@
-<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
-  <app-input [control]="cardForm.get('name')" label="Name"></app-input>
-  <app-input
-    [control]="cardForm.get('cardNumber')"
-    label="Card Number"
-  ></app-input>
-  <app-input
-    [control]="cardForm.get('expiration')"
-    label="Expiration"
-  ></app-input>
-  <app-input
-    [control]="cardForm.get('securityCode')"
-    label="Security Code"
-  ></app-input>
+<div class="container">
+  <div class="columns">
+    <app-card
+      class="column"
+      [name]="cardForm.get('name').value"
+      [expiration]="cardForm.get('expiration').value"
+      [cardNumber]="cardForm.get('cardNumber').value"
+    ></app-card>
 
-  <button [disabled]="cardForm.invalid" class="button is-primary" type="submit">
-    Submit
-  </button>
-</form>
+    <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" class="column">
+      <app-input [control]="cardForm.get('name')" label="Name"></app-input>
+      <app-input
+        [control]="cardForm.get('cardNumber')"
+        label="Card Number"
+      ></app-input>
+      <div class="columns">
+        <div class="column">
+          <app-input
+            [control]="cardForm.get('expiration')"
+            label="Expiration (MM/YY)"
+          ></app-input>
+        </div>
+        <div class="column">
+          <app-input
+            [control]="cardForm.get('securityCode')"
+            label="Security Code"
+          ></app-input>
+        </div>
+      </div>
 
-<br />
-<div>Form Contents: {{ cardForm.value | json }}</div>
-<div>Form i valid: {{ cardForm.valid }}</div>
-<div>Errors around name {{ cardForm.controls.name.errors | json }}</div>
+      <div class="buttons">
+        <button
+          [disabled]="cardForm.invalid"
+          class="button is-primary"
+          type="submit"
+        >
+          Submit
+        </button>
+
+        <button
+          type="button"
+          class="button is-warning"
+          (click)="onResetClick()"
+        >
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
