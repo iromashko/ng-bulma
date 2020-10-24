@@ -29,17 +29,12 @@
       </div>
 
       <div class="items">
-        <div class="item">
-          <div class="item-title">2</div>
-        </div>
-        <div class="item">
-          <div class="item-title">4</div>
-        </div>
-        <div class="item">
-          <div class="item-title">8</div>
-        </div>
-        <div class="item">
-          <div class="item-title">16</div>
+        <div
+          class="item"
+          [ngStyle]="getStyles(item)"
+          *ngFor="let item of items"
+        >
+          <div class="item-title">{{ item.value }}</div>
         </div>
       </div>
     </div>
