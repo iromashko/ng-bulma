@@ -32,7 +32,7 @@
         <div
           class="item"
           [ngStyle]="getStyles(item)"
-          *ngFor="let item of items"
+          *ngFor="let item of gameService.items"
         >
           <div class="item-title">{{ item.value }}</div>
         </div>
