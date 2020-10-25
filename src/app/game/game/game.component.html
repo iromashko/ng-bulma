@@ -38,5 +38,14 @@
         </div>
       </div>
     </div>
+    <div *ngIf="gameService.theEnd" class="overlay">
+      <div class="overlay-text">The End</div>
+    </div>
+  </div>
+  <div class="controls">
+    <h1>Scores: {{ gameService.scores }}</h1>
+    <button class="btn" (click)="gameService.startNewGame()">
+      Start new game
+    </button>
   </div>
 </div>
